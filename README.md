@@ -1,36 +1,44 @@
-# 🗳️ Election Visualizer: Decode Indian Democracy with Data
+# 🗳️ Election Visualizer — Explore India's Electoral Landscape
 
-**Election Visualizer** is an interactive web platform that turns complex Indian election data into intuitive and beautiful visualizations. Leveraging **Leaflet.js**, **Chart.js**, **Express.js**, and **MongoDB**, the platform empowers users to explore party-wise seats, women representation, and comparative state performance—all on a dark-themed modern interface.
+**[LIVE DEMO → nic-design.vercel.app](https://nic-design.vercel.app/)**
 
----
-
-## 🚀 Features
-
-- 🗺️ **Interactive Map**  
-  Explore Indian states with a live GeoJSON-powered Leaflet map. Click to reveal state-wise seat stats and party dominance.
-
-- 📊 **Dynamic Pie Charts**  
-  Instantly update state-wise pie charts powered by Chart.js for visual clarity on party performance.
-
-- 👩‍⚖️ **Women Representation Heatmap**  
-  Toggle between **Seat View** and **Women View** to visualize female MLA participation across states.
-
-- 🔍 **Smart Sidebar**  
-  - Search and jump to any state.  
-  - Compare two states side-by-side.  
-  - Explore a random state.  
-  - Reset the view with a single click.
-
-- 🎯 **Clean UI/UX**  
-  Tailored dark theme, responsive design, animated loading spinner, and toast notifications for seamless interaction.
+Election Visualizer is a modern, map-driven web platform that makes Indian election data visually intuitive and accessible. From interactive seat maps to women representation heatmaps and real-time state comparisons, this project lets you explore the heartbeat of democracy like never before.
 
 ---
 
-## 🛠️ Tech Stack
+## 🔍 Key Features
 
-| Frontend | Backend | Database | Others |
-|---------|---------|----------|--------|
-| Leaflet.js | Express.js | MongoDB | Chart.js |
-| HTML/CSS/JS | Node.js | Mongoose | GeoJSON |
+- 🗺️ **Interactive State Map**  
+  - Click any state to view seat breakdown and party dominance.
+  - Styled dynamically using enriched GeoJSON + Leaflet.js.
 
+- 📊 **Live Pie Charts & Dashboard**  
+  - Instant party-wise visualization with Chart.js.
+  - Seamless updates as you explore.
 
+- 👩‍⚖️ **Women Representation Toggle**  
+  - Switch to “Women View” to see female MLA participation state-wise.
+  - Color-coded heatmap based on % women MLAs.
+
+- ⚖️ **Side-by-Side State Comparison**  
+  - Compare two states interactively using dropdowns and pie charts.
+
+- 🧭 **Smart Tools**  
+  - Search by state name  
+  - Random State Explorer  
+  - Map Reset functionality
+
+- 💅 **Modern UI/UX**  
+  - LayerEdge-style dark theme  
+  - Responsive layout, spinner, toasts  
+  - Smooth scroll and animated elements
+
+---
+
+## 🌐 Tech Stack
+
+| Frontend         | Backend         | Database | Visualization | Tools        |
+|------------------|------------------|----------|---------------|--------------|
+| HTML/CSS/JS      | Node.js + Express| MongoDB  | Leaflet, Chart.js | GeoJSON, Vercel |
+
+---
