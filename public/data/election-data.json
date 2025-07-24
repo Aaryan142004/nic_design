@@ -1,0 +1,282 @@
+[
+  {
+    "state": "Andhra Pradesh",
+    "totalSeats": 42,
+    "party1": "TDP+",
+    "party1Seats": 19,
+    "party2": "TRS",
+    "party2Seats": 11
+  },
+  {
+    "state": "Andaman and Nicobar",
+    "totalSeats": 1,
+    "party1": "BJP",
+    "party1Seats": 1,
+    "party2": "N/A",
+    "party2Seats": 0
+  },
+  {
+    "state": "Arunachal Pradesh",
+    "totalSeats": 2,
+    "party1": "BJP",
+    "party1Seats": 1,
+    "party2": "INC",
+    "party2Seats": 1
+  },
+  {
+    "state": "Asom (Assam)",
+    "totalSeats": 14,
+    "party1": "BJP",
+    "party1Seats": 7,
+    "party2": "INC+",
+    "party2Seats": 3
+  },
+  {
+    "state": "Bihar",
+    "totalSeats": 40,
+    "party1": "BJP+",
+    "party1Seats": 31,
+    "party2": "RJD+",
+    "party2Seats": 7
+  },
+  {
+    "state": "Chandigarh",
+    "totalSeats": 1,
+    "party1": "BJP",
+    "party1Seats": 1,
+    "party2": "N/A",
+    "party2Seats": 0
+  },
+  {
+    "state": "Chhattisgarh",
+    "totalSeats": 11,
+    "party1": "BJP",
+    "party1Seats": 10,
+    "party2": "INC",
+    "party2Seats": 1
+  },
+  {
+    "state": "Dadra and Nagar Haveli",
+    "totalSeats": 1,
+    "party1": "BJP",
+    "party1Seats": 1,
+    "party2": "N/A",
+    "party2Seats": 0
+  },
+  {
+    "state": "Daman and Diu",
+    "totalSeats": 1,
+    "party1": "BJP",
+    "party1Seats": 1,
+    "party2": "N/A",
+    "party2Seats": 0
+  },
+  {
+    "state": "Delhi",
+    "totalSeats": 7,
+    "party1": "BJP",
+    "party1Seats": 7,
+    "party2": "N/A",
+    "party2Seats": 0
+  },
+  {
+    "state": "Goa",
+    "totalSeats": 2,
+    "party1": "BJP",
+    "party1Seats": 2,
+    "party2": "N/A",
+    "party2Seats": 0
+  },
+  {
+    "state": "Gujarat",
+    "totalSeats": 26,
+    "party1": "BJP",
+    "party1Seats": 26,
+    "party2": "N/A",
+    "party2Seats": 0
+  },
+  {
+    "state": "Haryana",
+    "totalSeats": 10,
+    "party1": "BJP+",
+    "party1Seats": 7,
+    "party2": "INLD",
+    "party2Seats": 2
+  },
+  {
+    "state": "Himachal Pradesh",
+    "totalSeats": 4,
+    "party1": "BJP",
+    "party1Seats": 4,
+    "party2": "N/A",
+    "party2Seats": 0
+  },
+  {
+    "state": "Jammu and Kashmir",
+    "totalSeats": 6,
+    "party1": "JKPDP",
+    "party1Seats": 3,
+    "party2": "BJP",
+    "party2Seats": 3
+  },
+  {
+    "state": "Jharkhand",
+    "totalSeats": 14,
+    "party1": "BJP",
+    "party1Seats": 12,
+    "party2": "INC+",
+    "party2Seats": 2
+  },
+  {
+    "state": "Karnataka",
+    "totalSeats": 28,
+    "party1": "BJP",
+    "party1Seats": 17,
+    "party2": "INC",
+    "party2Seats": 9
+  },
+  {
+    "state": "Kerala",
+    "totalSeats": 20,
+    "party1": "UDF",
+    "party1Seats": 12,
+    "party2": "LDF",
+    "party2Seats": 8
+  },
+  {
+    "state": "Lakshadweep",
+    "totalSeats": 1,
+    "party1": "NCP",
+    "party1Seats": 1,
+    "party2": "N/A",
+    "party2Seats": 0
+  },
+  {
+    "state": "Madhya Pradesh",
+    "totalSeats": 29,
+    "party1": "BJP",
+    "party1Seats": 27,
+    "party2": "INC",
+    "party2Seats": 2
+  },
+  {
+    "state": "Maharashtra",
+    "totalSeats": 48,
+    "party1": "BJP+",
+    "party1Seats": 42,
+    "party2": "INC+",
+    "party2Seats": 6
+  },
+  {
+    "state": "Manipur",
+    "totalSeats": 2,
+    "party1": "INC",
+    "party1Seats": 2,
+    "party2": "N/A",
+    "party2Seats": 0
+  },
+  {
+    "state": "Meghalaya",
+    "totalSeats": 2,
+    "party1": "BJP+",
+    "party1Seats": 1,
+    "party2": "INC",
+    "party2Seats": 1
+  },
+  {
+    "state": "Mizoram",
+    "totalSeats": 1,
+    "party1": "INC",
+    "party1Seats": 1,
+    "party2": "N/A",
+    "party2Seats": 0
+  },
+  {
+    "state": "Nagaland",
+    "totalSeats": 1,
+    "party1": "BJP+",
+    "party1Seats": 1,
+    "party2": "N/A",
+    "party2Seats": 0
+  },
+  {
+    "state": "Orissa",
+    "totalSeats": 21,
+    "party1": "BJD",
+    "party1Seats": 20,
+    "party2": "BJP",
+    "party2Seats": 1
+  },
+  {
+    "state": "Puducherry",
+    "totalSeats": 1,
+    "party1": "BJP+",
+    "party1Seats": 1,
+    "party2": "N/A",
+    "party2Seats": 0
+  },
+  {
+    "state": "Punjab",
+    "totalSeats": 13,
+    "party1": "SAD+",
+    "party1Seats": 6,
+    "party2": "AAP",
+    "party2Seats": 4
+  },
+  {
+    "state": "Rajasthan",
+    "totalSeats": 25,
+    "party1": "BJP",
+    "party1Seats": 25,
+    "party2": "N/A",
+    "party2Seats": 0
+  },
+  {
+    "state": "Sikkim",
+    "totalSeats": 1,
+    "party1": "SDF",
+    "party1Seats": 1,
+    "party2": "N/A",
+    "party2Seats": 0
+  },
+  {
+    "state": "Tamil Nadu",
+    "totalSeats": 39,
+    "party1": "AIADMK",
+    "party1Seats": 37,
+    "party2": "BJP+",
+    "party2Seats": 2
+  },
+  {
+    "state": "Tripura",
+    "totalSeats": 2,
+    "party1": "CPM",
+    "party1Seats": 2,
+    "party2": "N/A",
+    "party2Seats": 0
+  },
+  {
+    "state": "Uttar Pradesh",
+    "totalSeats": 80,
+    "party1": "BJP+",
+    "party1Seats": 73,
+    "party2": "SP",
+    "party2Seats": 5
+  },
+  {
+    "state": "Uttarakhand (Uttaranchal)",
+    "totalSeats": 5,
+    "party1": "BJP",
+    "party1Seats": 5,
+    "party2": "N/A",
+    "party2Seats": 0
+  },
+  {
+    "state": "West Bengal",
+    "totalSeats": 42,
+    "party1": "TMC",
+    "party1Seats": 34,
+    "party2": "INC",
+    "party2Seats": 4
+  }
+]
