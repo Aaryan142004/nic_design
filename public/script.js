@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
   const sidebar = document.getElementById("sidebar");
   const closeBtn = document.getElementById("close-btn");
@@ -56,7 +55,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  fetch("/election-data")
+  // ✅ Modified fetch section
+  fetch("https://nic-design.onrender.com/election-data")
     .then((res) => res.json())
     .then((data) => {
       console.log("✅ Election Data Fetched:", data);
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
           party2Seats: +item.party2Seats || 0,
         };
       });
-      return fetch("/data/Indian_States.geojson");
+      return fetch("https://nic-design.onrender.com/data/Indian_States.geojson");
     })
     .then((res) => res.json())
     .then((geojson) => {
