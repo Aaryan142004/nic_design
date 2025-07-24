@@ -1,6 +1,6 @@
 # 🗳️ Election Visualizer — Explore India's Electoral Landscape
 
-**[LIVE DEMO → nic-design.vercel.app](https://nic-design.vercel.app/)**
+**[LIVE DEMO → nic-design.vercel.app](https://nic-design.onrender.com/)**
 
 Election Visualizer is a modern, map-driven web platform that makes Indian election data visually intuitive and accessible. From interactive seat maps to women representation heatmaps and real-time state comparisons, this project lets you explore the heartbeat of democracy like never before.
 
