@@ -5,167 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Election Visualizer - India</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f8fafc;
-      color: #1f2937;
-    }
-
-    header {
-      text-align: center;
-      padding: 2rem 1rem;
-      background-color: #1e3a8a;
-      color: #fff;
-    }
-
-    header img {
-      width: 80px;
-      margin-bottom: 1rem;
-    }
-
-    header h1 {
-      font-size: 1.8rem;
-    }
-
-    .cta button {
-      margin-top: 1rem;
-      padding: 10px 20px;
-      background: #3b82f6;
-      border: none;
-      color: white;
-      font-size: 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .map-wrapper {
-      display: flex;
-      flex-direction: column-reverse;
-      gap: 1rem;
-    }
-
-    #map {
-      height: 400px;
-      width: 100%;
-    }
-
-    .sidebar {
-      background: #f1f5f9;
-      padding: 1rem;
-      border-top: 2px solid #e2e8f0;
-    }
-
-    .sidebar input {
-      width: 100%;
-      padding: 8px;
-      margin: 0.5rem 0;
-    }
-
-    #pieChartContainer {
-      max-width: 100%;
-    }
-
-    .info-block, .flashcards, .comparison-section {
-      padding: 2rem 1rem;
-      background: #fff;
-    }
-
-    .flashcards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-    }
-
-    .flashcards .card {
-      background: #e0f2fe;
-      padding: 1rem;
-      border-radius: 10px;
-      text-align: center;
-    }
-
-    .comparison-section select,
-    .comparison-section button {
-      padding: 0.5rem;
-      margin: 0.5rem 0;
-    }
-
-    .compare-charts {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .chart-box {
-      background: #f3f4f6;
-      padding: 1rem;
-      border-radius: 10px;
-    }
-
-    footer {
-      padding: 1rem;
-      text-align: center;
-      background: #1e3a8a;
-      color: #fff;
-      font-size: 0.9rem;
-    }
-
-    footer a {
-      color: #93c5fd;
-      margin: 0 8px;
-      text-decoration: none;
-    }
-
-    #toast {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #10b981;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      display: none;
-      z-index: 9999;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
-
-    @media (min-width: 768px) {
-      .map-wrapper {
-        flex-direction: row;
-      }
-
-      .sidebar {
-        width: 300px;
-        border-top: none;
-        border-left: 2px solid #e2e8f0;
-      }
-
-      #map {
-        height: 500px;
-        flex: 1;
-      }
-
-      .compare-charts {
-        flex-direction: row;
-        justify-content: space-between;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
+  <!-- === HEADER === -->
   <header>
-    <img src="Election-Commission_Preview.png" alt="ECI Logo" />
+    <img src="Election-Commission_Preview.png" alt="ECI Logo">
     <h1>Election Commission of India</h1>
     <p>State-wise Percentage of Women Elected & Party-wise Analysis - 2022 Legislative Assembly</p>
     <div class="cta">
@@ -173,6 +20,7 @@
     </div>
   </header>
 
+  <!-- === MAP SECTION === -->
   <section id="mapSection">
     <div class="map-wrapper">
       <div id="map"></div>
@@ -182,35 +30,63 @@
         <input type="text" id="stateSearch" placeholder="Search state...">
         <ul id="stateList" class="dropdown-list"></ul>
         <button id="refresh">Refresh</button>
+
         <div id="pieChartContainer">
           <canvas id="seatDistribution"></canvas>
         </div>
+
         <div id="stateInfo">
           <p><strong><span id="stateName"></span></strong></p>
           <p><span id="party1Name"></span>: <span id="party1Seats"></span> seats</p>
           <p><span id="party2Name"></span>: <span id="party2Seats"></span> seats</p>
         </div>
       </div>
+      <button id="menu-btn" class="menu-btn" title="Open Sidebar">
+        <i class="fas fa-bars"></i>
+      </button>
     </div>
   </section>
 
+  <!-- === WHY SECTION === -->
   <section class="info-block">
     <h2>Why This Visualization?</h2>
     <p>This project aims to present a clear, interactive view of state-wise political trends and women's representation in India. With intuitive visuals, district overlays, and real-time updates, it enables transparency and accessible data-driven insights for researchers, journalists, and citizens alike.</p>
   </section>
 
+  <!-- === FLASHCARDS === -->
   <section class="flashcards">
-    <div class="card"><i class="fas fa-female"></i><h3>Women Representation</h3><p>Visualizes the state-wise share of women elected to legislative assemblies in the 2022 elections.</p></div>
-    <div class="card"><i class="fas fa-vote-yea"></i><h3>Party Dominance</h3><p>Color-coded maps show leading political parties in each state and their seat share.</p></div>
-    <div class="card"><i class="fas fa-chart-pie"></i><h3>Real-time Dashboard</h3><p>Interactive pie charts and tooltips show a live summary of seats per party for any selected state.</p></div>
-    <div class="card"><i class="fas fa-map-marked-alt"></i><h3>District Insight</h3><p>Hover and zoom into districts to discover granular administrative divisions of each state.</p></div>
+    <div class="card">
+      <i class="fas fa-female"></i>
+      <h3>Women Representation</h3>
+      <p>Visualizes the state-wise share of women elected to legislative assemblies in the 2022 elections.</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-vote-yea"></i>
+      <h3>Party Dominance</h3>
+      <p>Color-coded maps show leading political parties in each state and their seat share.</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-chart-pie"></i>
+      <h3>Real-time Dashboard</h3>
+      <p>Interactive pie charts and tooltips show a live summary of seats per party for any selected state.</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-map-marked-alt"></i>
+      <h3>District Insight</h3>
+      <p>Hover and zoom into districts to discover granular administrative divisions of each state.</p>
+    </div>
   </section>
 
+  <!-- === COMPARISON SECTION === -->
   <section class="comparison-section" id="comparisonSection">
     <h2>Compare States</h2>
     <div class="compare-controls">
-      <select id="stateA"><option value="">Select State A</option></select>
-      <select id="stateB"><option value="">Select State B</option></select>
+      <select id="stateA">
+        <option value="">Select State A</option>
+      </select>
+      <select id="stateB">
+        <option value="">Select State B</option>
+      </select>
       <button id="compareBtn">Compare</button>
     </div>
     <div class="compare-charts">
@@ -225,14 +101,22 @@
     </div>
   </section>
 
-  <div id="toast"></div>
+  <!-- === SPINNER & TOAST === -->
+  <div id="loadingSpinner" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:9999; background:#1e293b; padding:20px 30px; border-radius:8px; color:#f8fafc; font-weight:600;">
+    🔄 Refreshing data...
+  </div>
 
+  <div id="toast" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #10b981; color: white; padding: 12px 20px; border-radius: 8px; font-size: 0.9rem; display: none; z-index: 9999; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+  </div>
+
+  <!-- === FOOTER === -->
   <footer>
-    Made by Aaryan Malik |
-    <a href="https://github.com/aaryanmalik" target="_blank">GitHub</a> |
+    Made by Aaryan Malik | 
+    <a href="https://github.com/aaryanmalik" target="_blank">GitHub</a> | 
     <a href="https://linkedin.com/in/aaryanmalik" target="_blank">LinkedIn</a>
   </footer>
 
+  <!-- === SCRIPTS === -->
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="script.js"></script>
