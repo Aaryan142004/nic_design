@@ -1,15 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
   const sidebar = document.getElementById("sidebar");
   const closeBtn = document.getElementById("close-btn");
+  const menuBtn = document.getElementById("menu-btn");
+  const refreshBtn = document.getElementById("refresh");
   const stateSearch = document.getElementById("stateSearch");
   const stateList = document.getElementById("stateList");
-  const refreshBtn = document.getElementById("refresh");
-  const menuBtn = document.getElementById("menu-btn");
   const randomBtn = document.getElementById("randomState");
+  const pieChartContainer = document.getElementById("pieChartContainer");
 
   const partyColors = {
     "TDP+": "#FF9933", TRS: "#0000FF", BJP: "green", INC: "red", SP: "#FF0000",
-    "BJP+": "#3B7A57", TMC: "#ffb703", AIADMK: "#007f5f", CPM: "#ff0055", SDF: "#3a86ff", "INC+": "#9b5de5", "RJD+": "#4cc9f0"
+    "BJP+": "#3B7A57", TMC: "#ffb703", AIADMK: "#007f5f", CPM: "#ff0055",
+    SDF: "#3a86ff", "INC+": "#9b5de5", "RJD+": "#4cc9f0"
   };
 
   let map = L.map("map").setView([20.5937, 78.9629], 5);
@@ -26,23 +28,38 @@ document.addEventListener("DOMContentLoaded", function () {
   let chartB = null;
   let currentMapStyle = "seats";
 
-  closeBtn?.addEventListener("click", () => {
-    sidebar.classList.remove("active");
-    menuBtn.classList.add("visible");
-    setTimeout(() => map.invalidateSize(), 300);
-  });
-
   menuBtn?.addEventListener("click", () => {
     sidebar.classList.add("active");
     menuBtn.classList.remove("visible");
     setTimeout(() => map.invalidateSize(), 300);
   });
 
+  closeBtn?.addEventListener("click", () => {
+    sidebar.classList.remove("active");
+    menuBtn.classList.add("visible");
+    setTimeout(() => map.invalidateSize(), 300);
+  });
+
+  document.addEventListener("click", function (e) {
+    if (
+      !sidebar.contains(e.target) &&
+      !menuBtn.contains(e.target) &&
+      sidebar.classList.contains("active")
+    ) {
+      sidebar.classList.remove("active");
+      menuBtn.classList.add("visible");
+    }
+  });
+
   refreshBtn?.addEventListener("click", () => {
     clearAllStateColors();
     map.setView([20.5937, 78.9629], 5);
+    pieChartContainer.style.display = "none";
+    setTimeout(() => {
+      pieChartContainer.style.display = "block";
+      map.invalidateSize();
+    }, 100);
     showToast("🔄 Map reset and data cleared");
-    setTimeout(() => map.invalidateSize(), 300);
   });
 
   randomBtn?.addEventListener("click", () => {
@@ -93,6 +110,36 @@ document.addEventListener("DOMContentLoaded", function () {
     return name?.toLowerCase().replace(/[^a-z]/g, "") || "";
   }
 
+  function clearAllStateColors() {
+    if (!stateLayer) return;
+    stateLayer.eachLayer((layer) => {
+      layer.setStyle({ fillColor: "#ccc" });
+    });
+  }
+
+  function colorState(norm, type = "seats") {
+    const layer = stateLayerMap[norm];
+    const sData = dataByState[norm];
+    if (!layer || !sData) return;
+
+    const value = type === "party"
+      ? (sData.party1Seats > sData.party2Seats ? sData.party1 : sData.party2)
+      : sData.seats;
+
+    const color = getColor(value, type);
+    layer.setStyle({ fillColor: color });
+  }
+
+  function getColor(value, type = "seats") {
+    if (type === "party") return partyColors[value] || "#999";
+    return value > 40 ? "#16a34a"
+      : value > 30 ? "#84cc16"
+      : value > 20 ? "#f59e0b"
+      : value > 10 ? "#f97316"
+      : value > 5 ? "#ef4444"
+      : "#94a3b8";
+  }
+
   function onEachFeature(feature, layer) {
     const sName = feature.properties.NAME_1;
     const norm = normalize(sName);
@@ -125,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function updateDashboard(data) {
-    document.getElementById("pieChartContainer").style.display = "block";
+    pieChartContainer.style.display = "block";
     document.getElementById("stateName").textContent = data.state;
     document.getElementById("party1Name").textContent = data.party1;
     document.getElementById("party1Seats").textContent = data.party1Seats;
@@ -155,36 +202,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  function colorState(norm, type = "seats") {
-    const layer = stateLayerMap[norm];
-    const sData = dataByState[norm];
-    if (!layer || !sData) return;
-
-    const value = type === "party"
-      ? (sData.party1Seats > sData.party2Seats ? sData.party1 : sData.party2)
-      : sData.seats;
-
-    const color = getColor(value, type);
-    layer.setStyle({ fillColor: color });
-  }
-
-  function getColor(value, type = "seats") {
-    if (type === "party") return partyColors[value] || "#999";
-    return value > 40 ? "#16a34a"
-      : value > 30 ? "#84cc16"
-      : value > 20 ? "#f59e0b"
-      : value > 10 ? "#f97316"
-      : value > 5 ? "#ef4444"
-      : "#94a3b8";
-  }
-
-  function clearAllStateColors() {
-    if (!stateLayer) return;
-    stateLayer.eachLayer((layer) => {
-      layer.setStyle({ fillColor: "#ccc" });
-    });
-  }
-
   function showToast(msg, isError = false) {
     const toast = document.getElementById("toast");
     toast.textContent = msg;
@@ -193,32 +210,20 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => (toast.style.display = "none"), 3000);
   }
 
-  stateSearch?.addEventListener("input", () => {
-    const term = stateSearch.value.toLowerCase();
-    const results = allStates.filter((s) => s.toLowerCase().includes(term));
-    stateList.innerHTML = results.map((s) => `<li>${s}</li>`).join("");
-    stateList.querySelectorAll("li").forEach((li) => {
-      li.addEventListener("click", () => {
-        stateSearch.value = li.textContent;
-        stateList.innerHTML = "";
-        const norm = normalize(li.textContent);
-        const layer = stateLayerMap[norm];
-        const sData = dataByState[norm];
-        if (layer && sData) {
-          clearAllStateColors();
-          map.fitBounds(layer.getBounds());
-          updateDashboard({ state: li.textContent, ...sData });
-          colorState(norm, currentMapStyle);
-          setTimeout(() => map.invalidateSize(), 300);
-        }
-      });
+  function populateComparisonDropdowns() {
+    const stateA = document.getElementById("stateA");
+    const stateB = document.getElementById("stateB");
+    if (!stateA || !stateB) return;
+    allStates.forEach((s) => {
+      stateA.appendChild(new Option(s, s));
+      stateB.appendChild(new Option(s, s));
     });
-  });
+  }
 
   document.getElementById("compareBtn")?.addEventListener("click", () => {
     const a = normalize(document.getElementById("stateA").value);
     const b = normalize(document.getElementById("stateB").value);
-    if (!a || !b || a === b) return showToast("⚠️ Select two different states!");
+    if (!a || !b || a === b) return showToast("\u26a0\ufe0f Select two different states!");
     drawCompareChart(a, "chartA", "labelA", chartA, (c) => chartA = c);
     drawCompareChart(b, "chartB", "labelB", chartB, (c) => chartB = c);
     setTimeout(() => map.invalidateSize(), 300);
@@ -253,15 +258,27 @@ document.addEventListener("DOMContentLoaded", function () {
     setChartRef(newChart);
   }
 
-  function populateComparisonDropdowns() {
-    const stateA = document.getElementById("stateA");
-    const stateB = document.getElementById("stateB");
-    if (!stateA || !stateB) return;
-    allStates.forEach((s) => {
-      stateA.appendChild(new Option(s, s));
-      stateB.appendChild(new Option(s, s));
+  stateSearch?.addEventListener("input", () => {
+    const term = stateSearch.value.toLowerCase();
+    const results = allStates.filter((s) => s.toLowerCase().includes(term));
+    stateList.innerHTML = results.map((s) => `<li>${s}</li>`).join("");
+    stateList.querySelectorAll("li").forEach((li) => {
+      li.addEventListener("click", () => {
+        stateSearch.value = li.textContent;
+        stateList.innerHTML = "";
+        const norm = normalize(li.textContent);
+        const layer = stateLayerMap[norm];
+        const sData = dataByState[norm];
+        if (layer && sData) {
+          clearAllStateColors();
+          map.fitBounds(layer.getBounds());
+          updateDashboard({ state: li.textContent, ...sData });
+          colorState(norm, currentMapStyle);
+          setTimeout(() => map.invalidateSize(), 300);
+        }
+      });
     });
-  }
+  });
 
   window.addEventListener("resize", () => {
     map.invalidateSize();
