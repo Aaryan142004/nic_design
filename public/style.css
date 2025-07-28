@@ -4,6 +4,18 @@
   padding: 0;
   box-sizing: border-box;
 }
+#map {
+  min-height: 300px;  /* ✅ Ensures map renders on mobile */
+  width: 100%;
+}
+.map-wrapper {
+  display: flex;
+  flex-direction: column; /* ✅ Helps mobile stacking */
+  height: auto;            /* ✅ instead of 100vh on small screens */
+  width: 100%;
+  position: relative;
+}
+
 
 body, html {
   height: 100%;
