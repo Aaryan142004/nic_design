@@ -27,22 +27,22 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentMapStyle = "seats";
 
   closeBtn?.addEventListener("click", () => {
-    sidebar.classList.add("hidden");
+    sidebar.classList.remove("active");
     menuBtn.classList.add("visible");
-    setTimeout(() => map.invalidateSize(), 300); // ✅
+    setTimeout(() => map.invalidateSize(), 300);
   });
 
   menuBtn?.addEventListener("click", () => {
-    sidebar.classList.remove("hidden");
+    sidebar.classList.add("active");
     menuBtn.classList.remove("visible");
-    setTimeout(() => map.invalidateSize(), 300); // ✅
+    setTimeout(() => map.invalidateSize(), 300);
   });
 
   refreshBtn?.addEventListener("click", () => {
     clearAllStateColors();
     map.setView([20.5937, 78.9629], 5);
     showToast("🔄 Map reset and data cleared");
-    setTimeout(() => map.invalidateSize(), 300); // ✅
+    setTimeout(() => map.invalidateSize(), 300);
   });
 
   randomBtn?.addEventListener("click", () => {
@@ -55,11 +55,10 @@ document.addEventListener("DOMContentLoaded", function () {
       map.fitBounds(layer.getBounds());
       updateDashboard({ state: rand, ...sData });
       colorState(norm, currentMapStyle);
-      setTimeout(() => map.invalidateSize(), 300); // ✅
+      setTimeout(() => map.invalidateSize(), 300);
     }
   });
 
-  // ✅ Fetch election data then GeoJSON
   fetch("https://nic-design.onrender.com/election-data")
     .then((res) => res.json())
     .then((data) => {
@@ -112,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (sData) {
         updateDashboard({ state: sName, ...sData });
         colorState(norm, currentMapStyle);
-        setTimeout(() => map.invalidateSize(), 300); // ✅
+        setTimeout(() => map.invalidateSize(), 300);
       }
     });
 
@@ -210,7 +209,7 @@ document.addEventListener("DOMContentLoaded", function () {
           map.fitBounds(layer.getBounds());
           updateDashboard({ state: li.textContent, ...sData });
           colorState(norm, currentMapStyle);
-          setTimeout(() => map.invalidateSize(), 300); // ✅
+          setTimeout(() => map.invalidateSize(), 300);
         }
       });
     });
@@ -222,7 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!a || !b || a === b) return showToast("⚠️ Select two different states!");
     drawCompareChart(a, "chartA", "labelA", chartA, (c) => chartA = c);
     drawCompareChart(b, "chartB", "labelB", chartB, (c) => chartB = c);
-    setTimeout(() => map.invalidateSize(), 300); // ✅
+    setTimeout(() => map.invalidateSize(), 300);
   });
 
   function drawCompareChart(norm, canvasId, labelId, chartObj, setChartRef) {
@@ -264,7 +263,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // ✅ Recalculate map size on any screen resize
   window.addEventListener("resize", () => {
     map.invalidateSize();
   });
